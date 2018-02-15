@@ -5,6 +5,7 @@ from astropy.cosmology import FlatLambdaCDM
 from scipy.interpolate import interp1d
 cosmo = FlatLambdaCDM(H0 = 73.0,Om0=0.25)
 
+import matplotlib
 from matplotlib.transforms import Affine2D
 import mpl_toolkits.axisartist.floating_axes as floating_axes
 import numpy as np
@@ -16,17 +17,23 @@ import matplotlib.pyplot as plt
 from matplotlib import pyplot, transforms
 
 
+font = {'family' : 'STIXGeneral',
+        'size'   : 22}
+
+matplotlib.rc('font', **font)
+
+
 redshift = 2.0
 galfile = 'gal_iz30_atlascat_vel.cat'
 x, y, z, vy, loglum = np.loadtxt(galfile, unpack = True)
 
-zc = z < 20
+zc = z < 25
 
 aexp = 1./(1 + redshift)
 Hz = cosmo.H(redshift).value
 
-sz = 1e-2
-PlotName = 'sigmax' # zspace # sigmaX
+sz = 1e-4
+PlotName = 'sigmax' # zspace # sigmax # real
 
 
 y_ = y if PlotName == 'real' else y + vy / (aexp*Hz) # zspace
@@ -34,7 +41,7 @@ y_ = y if PlotName == 'real' else y + vy / (aexp*Hz) # zspace
 pname = PlotName
 
 if PlotName == 'sigmax':
-  pname = 'zspace_sigmaz%.4f_thick' % sz
+  pname = 'zspace_sigmaz%.4f_andrea' % sz
 
 
 ym = np.mean(y_[zc])
@@ -62,10 +69,8 @@ tgal = np.arcsin( (x[zc] - xm) / rad)  # angular position
 tmax = tgal.max()*.75
 tmin = tgal.min()*.75
 
-zmax = 2.13
-zmin = 1.78
-
-
+zmax = 1.99
+zmin = 1.85
 
 
 def setup_axes2(fig, rect,tmin, tmax,zmin,zmax):
@@ -73,20 +78,9 @@ def setup_axes2(fig, rect,tmin, tmax,zmin,zmax):
   With custom locator and formatter.
   Note that the extreme values are swapped.
   """
-    # rotate a bit for better orientation
-  #tr_rotate = Affine2D().scale(2, 1).rotate_deg(90)
-#  tr_rotate = Affine2D().translate(10, 1)
-  
-  # scale degree to radians
- # tr_scale = Affine2D().scale(np.pi/180., 1.)
 
   tr =PolarAxes.PolarTransform()
-
-
   pi = np.pi
-#  angle_ticks = [(0, r"$0$"),
-#                 (.25*pi, r"$\frac{1}{4}\pi$"),
-#                 (.5*pi, r"$\frac{1}{2}\pi$")]
 
   angle_ticks = [(tmin, '%.2f' % tmin), (0,r'$0$'), (tmax, '%.2f' % tmax)]
 
@@ -182,13 +176,51 @@ ax, aux_ax = setup_axes2(fig, 111,tmin,tmax,zmin,zmax)
 #base = pyplot.gca().transData
 #rot = transforms.Affine2D().rotate_deg(90)
 
-aux_ax.plot(tgal,zgal,'.',color='k',markersize=3)
+aux_ax.plot(tgal,zgal,'.',color='k',markersize=5)
 #aux_ax.scatter(tgal,zgal)
-plt.ylabel('redshift')
+
+rmin = cosmo.comoving_distance(zmin)*cosmo.h
+rmax = cosmo.comoving_distance(zmax)*cosmo.h
+#ax.set_ylabel('redshift',fontsize=20)
+
+#plt.title('hello')
+
+#ax.text(0.5,-0.01,'hello',transform=ax.transAxes, rotation=+155)
+
+
+ax.axis["left"].set_axis_direction("top")
+ax.axis["left"].toggle(ticklabels=True, label=True)
+ax.axis["left"].major_ticklabels.set_axis_direction("top")
+ax.axis["left"].label.set_axis_direction("top")
+
+ax.axis["right"].major_ticklabels.set_color("white")
+ax.axis["right"].set_axis_direction("bottom")
+ax.axis["right"].toggle(ticklabels=True, label=True)
+
+
+ax.axis['right'].label.set_visible(True)
+ax.axis['right'].label.set_text(r'${\rm Mpc/}h$')
+
+ax.axis['left'].label.set_visible(True)
+ax.axis['left'].label.set_text('redshift')
+#ax2 = fig.add_subplot(111, sharex=ax, frameon=False)
+#ax2.yaxis.tick_right()
+#ax2.yaxis.set_label_position("right")
+#ax2.set_ylabel(r'${\rm Mpc}/h$',fontsize=20)
+#ax2.set_ylim([rmin.value, rmax.value])
 
 
 
-plt.savefig(pname+'.png',bbox_inches='tight',dpi=300)
+zt_arr = [1.88, 1.92, 1.96]
+rt_arr = cosmo.comoving_distance(zt_arr)*cosmo.h
+ax.text(0.18, 0.01, '%ld' % rt_arr[0].value, transform=ax.transAxes,rotation=-3)
+ax.text(0.45, 0.005, '%ld' % rt_arr[1].value, transform=ax.transAxes,rotation=-3)
+ax.text(0.73, -0.003, '%ld' % rt_arr[2].value, transform=ax.transAxes,rotation=-3)
+
+
+
+
+plt.savefig(pname+'.eps',bbox_inches='tight')
 
 
 
