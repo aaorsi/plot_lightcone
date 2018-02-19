@@ -27,7 +27,7 @@ redshift = 2.0
 galfile = 'gal_iz30_atlascat_vel.cat'
 x, y, z, vy, loglum = np.loadtxt(galfile, unpack = True)
 
-zc = z < 25
+zc = z < 30
 
 aexp = 1./(1 + redshift)
 Hz = cosmo.H(redshift).value
@@ -69,8 +69,8 @@ tgal = np.arcsin( (x[zc] - xm) / rad)  # angular position
 tmax = tgal.max()*.25
 tmin = tgal.min()*.25
 
-zmax = 1.99
-zmin = 1.85
+zmax = 2.15
+zmin = 1.80
 
 
 def setup_axes2(fig, rect,tmin, tmax,zmin,zmax):
@@ -176,7 +176,7 @@ ax, aux_ax = setup_axes2(fig, 111,tmin,tmax,zmin,zmax)
 #base = pyplot.gca().transData
 #rot = transforms.Affine2D().rotate_deg(90)
 
-aux_ax.plot(tgal,zgal,'.',color='k',markersize=5)
+aux_ax.plot(tgal,zgal,'.',color='k',markersize=3)
 #aux_ax.scatter(tgal,zgal)
 
 rmin = cosmo.comoving_distance(zmin)*cosmo.h
@@ -211,11 +211,16 @@ ax.axis['left'].label.set_text('redshift')
 
 
 
-zt_arr = [1.88, 1.92, 1.96]
+zt_arr = np.linspace(zmin,zmax*.99,num=3)
 rt_arr = cosmo.comoving_distance(zt_arr)*cosmo.h
-ax.text(0.18, 0.01, '%ld' % rt_arr[0].value, transform=ax.transAxes,rotation=-3)
-ax.text(0.45, 0.005, '%ld' % rt_arr[1].value, transform=ax.transAxes,rotation=-3)
-ax.text(0.73, -0.003, '%ld' % rt_arr[2].value, transform=ax.transAxes,rotation=-3)
+#ax.axis.set_xticks(zt_arr, rt_arr)
+
+for zz, rr in zip(zt_arr, rt_arr):
+  aux_ax.text(tmin*1.25,zz,'%ld' % rr.value, rotation=-1.5)
+
+print tmin
+#ax.text(0.45, 0.005, '%ld' % rt_arr[1].value, transform=ax.transAxes,rotation=-3)
+#ax.text(0.73, -0.003, '%ld' % rt_arr[2].value, transform=ax.transAxes,rotation=-3)
 
 
 
