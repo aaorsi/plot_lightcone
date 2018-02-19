@@ -32,16 +32,18 @@ zc = z < 30
 aexp = 1./(1 + redshift)
 Hz = cosmo.H(redshift).value
 
-sz = 1e-4
+sz = 1e-2
 PlotName = 'sigmax' # zspace # sigmax # real
 
 
 y_ = y if PlotName == 'real' else y + vy / (aexp*Hz) # zspace
 
-pname = PlotName
+ppname = PlotName
 
 if PlotName == 'sigmax':
-  pname = 'zspace_sigmaz%.4f_andrea_2' % sz
+  ppname = 'zspace_sigmaz%.4f' % sz
+
+pname = '%s_andrea2' % ppname
 
 
 ym = np.mean(y_[zc])
