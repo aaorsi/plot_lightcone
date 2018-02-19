@@ -6,6 +6,7 @@ This code receives an input catalogue with positions and velocities at a given r
 
 The redshift of each galaxy z_gal = z + G(z), where z is given by the line-of-sight position, and G(z) is a Gaussian centered in zero with variance dz^2
 
-Here's an example of the output of the code:
+Here are some examples of the output of the code:
 
 ![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace.png)
+![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_2.png)
