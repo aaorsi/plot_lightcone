@@ -41,7 +41,7 @@ y_ = y if PlotName == 'real' else y + vy / (aexp*Hz) # zspace
 pname = PlotName
 
 if PlotName == 'sigmax':
-  pname = 'zspace_sigmaz%.4f_andrea' % sz
+  pname = 'zspace_sigmaz%.4f_andrea_2' % sz
 
 
 ym = np.mean(y_[zc])
@@ -66,8 +66,8 @@ if PlotName == 'sigmax':
 tgal = np.arcsin( (x[zc] - xm) / rad)  # angular position
 
 
-tmax = tgal.max()*.75
-tmin = tgal.min()*.75
+tmax = tgal.max()*.25
+tmin = tgal.min()*.25
 
 zmax = 1.99
 zmin = 1.85
