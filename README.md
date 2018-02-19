@@ -4,7 +4,9 @@ This code receives an input catalogue with positions and velocities at a given r
 
 ![](https://latex.codecogs.com/gif.latex?%5Cdelta%20z%20%3D%20%5Csigma_z%281&plus;z%29)
 
-The redshift of each galaxy z_gal = z + G(z), where z is given by the line-of-sight position, and G(z) is a Gaussian centered in zero with variance dz^2
+The redshift of each galaxy z_gal = z + G(z), where z is given by the line-of-sight position, and G(z) is a Gaussian centered in zero with variance dz^2.
+
+The code makes use of numpy, matplotlib, scipy and astropy
 
 Here are some examples of the output of the code:
 
