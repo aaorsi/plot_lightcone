@@ -10,7 +10,6 @@ The code makes use of numpy, matplotlib, scipy and astropy
 
 The following examples of usage of this code have been published in Figure 1 of Dickinson et al. 2019, [Observing Galaxy Evolution in the Context of Large-Scale Structure](https://arxiv.org/abs/1903.07409). The figures show the impact of adding progresively larger uncertainties in the redshift of galaxies, thus, eventually smearing out the spatial structure of the galaxy distribution.
 
-![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0001_dickinson.png)
+<img src="https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0001_dickinson.png" width="200">
 <img src="https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0010_dickinson.png" width="200">
-![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0010_dickinson.png=250x)
-![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0100_dickinson.png=250x)
+<img src="https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0100_dickinson.png" width="200">
