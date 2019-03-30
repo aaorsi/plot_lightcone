@@ -8,7 +8,9 @@ The redshift of each galaxy z_gal = z + G(z), where z is given by the line-of-si
 
 The code makes use of numpy, matplotlib, scipy and astropy
 
-Here are some examples of the output of the code:
+The following examples of usage of this code have been published in Figure 1 of Dickinson et al. 2019, [Observing Galaxy Evolution in the Context of Large-Scale Structure](https://arxiv.org/abs/1903.07409). The figures show the impact of adding progresively larger uncertainties in the redshift of galaxies, thus, eventually smearing out the spatial structure of the galaxy distribution.
 
-![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace.png)
-![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_2.png)
+![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0001_dickinson.png)
+![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0010_dickinson.png)
+![Example of output](https://github.com/aaorsi/plot_lightcone/blob/master/zspace_sigmaz0.0100_dickinson.png)
+
